@@ -1,6 +1,6 @@
 
 build:
-	gcc src/main.c src/add.c src/sub.c src/mult.c src/div.c src/percentage.c -o calculator
+	gcc src/main.c src/operations/add.c src/operations/sub.c src/operations/mult.c src/operations/div.c src/operations/percentage.c -o calculator
 
 run:
 	./calculator
