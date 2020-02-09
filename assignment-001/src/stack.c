@@ -38,10 +38,10 @@ float pop(struct Stack* stack) {
 	return stack->array[stack->top--];
 }
 
-int main() {
-	struct Stack* stack = createStack(100);
-	return 0;
-}
+/* int main() { */
+	/* struct Stack* stack = createStack(100); */
+	/* return 0; */
+/* } */
 
 
 
