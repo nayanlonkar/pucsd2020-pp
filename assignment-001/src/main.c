@@ -11,8 +11,6 @@ int main() {
 
 	while(1) {
 		printf(PROMPT);
-
-		/* fgets(expression, MAX, stdin); */
 		scanf("%[^\n]%*c",expression);
 		
 		if (strcmp(expression,"q") == 0)
