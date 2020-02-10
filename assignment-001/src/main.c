@@ -1,24 +1,10 @@
-#include "../include/functions.h"
+#include "calculate.c"
 #include <stdio.h>
 #include <string.h>
 #define MAX 500
 #define PROMPT ">>> "
 
 int main() {
-	
-	/* char expression[100]; */
-	/* printf("Enter a expression : "); */
-	/* scanf("%s", expression); */
-	/* printf("\n"); */
-	/* printf("%s", expression); */
-
-	/* int a = 10, b = 5; */
-
-	/* printf("addition is: %f\n", add(a, b)); */
-	/* printf("subtraction is: %f\n", sub(a, b)); */
-	/* printf("multiplication is: %f\n", mult(a, b)); */
-	/* printf("division is: %f\n", div(a, b)); */
-	/* printf("percentage is: %f\n", percentage(a, b)); */
 	
 	char expression[MAX];
 	printf("Enter expression else press q to exit\n");
@@ -31,6 +17,7 @@ int main() {
 		
 		if (strcmp(expression,"q") == 0)
 			break;
+		printf("Ans-> %f\n", calculate(expression));
 	}
 
 	return 0;
