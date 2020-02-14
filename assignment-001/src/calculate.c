@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "../include/functions.h"
 
 
 int precedence(char op){ 
@@ -12,14 +13,24 @@ int precedence(char op){
 } 
 
 
+/* int applyOp(int a, int b, char op){  */
+	/* switch(op){  */
+		/* case '+': return a + b;  */
+		/* case '-': return a - b;  */
+		/* case '*': return a * b;  */
+		/* case '/': return a / b;  */
+	/* }  */
+/* } */
+
 int applyOp(int a, int b, char op){ 
 	switch(op){ 
-		case '+': return a + b; 
-		case '-': return a - b; 
-		case '*': return a * b; 
-		case '/': return a / b; 
+		case '+': add(a, b); 
+		case '-': sub(a, b); 
+		case '*': mult(a, b); 
+		case '/': div(a, b); 
 	} 
 }
+
 
 float calculate(char* expression) {
 	int stackSize = 500;
