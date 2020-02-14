@@ -5,6 +5,9 @@ build:
 build-static:
 	gcc src/main.c src/libfunctions.a -o calculator
 
+build-shared:
+	gcc src/main.c src/libfunctions.so -o calculator
+
 run:
 	./calculator
 
