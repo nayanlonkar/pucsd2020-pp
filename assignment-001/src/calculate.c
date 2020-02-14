@@ -13,21 +13,12 @@ int precedence(char op){
 } 
 
 
-/* int applyOp(int a, int b, char op){  */
-	/* switch(op){  */
-		/* case '+': return a + b;  */
-		/* case '-': return a - b;  */
-		/* case '*': return a * b;  */
-		/* case '/': return a / b;  */
-	/* }  */
-/* } */
-
-int applyOp(int a, int b, char op){ 
+int applyOp(float a, float b, char op){ 
 	switch(op){ 
-		case '+': add(a, b); 
-		case '-': sub(a, b); 
-		case '*': mult(a, b); 
-		case '/': div(a, b); 
+		case '+': return add(a, b); 
+		case '-': return sub(a, b); 
+		case '*': return mult(a, b); 
+		case '/': return div(a, b); 
 	} 
 }
 
