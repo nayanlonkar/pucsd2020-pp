@@ -13,7 +13,7 @@ int precedence(char op){
 } 
 
 
-int applyOp(float a, float b, char op){ 
+float applyOp(float a, float b, char op){ 
 	switch(op){ 
 		case '+': return add(a, b); 
 		case '-': return sub(a, b); 

@@ -1,4 +1,4 @@
-#include "calculate.c"
+#include "../include/calculate.h"
 #include <stdio.h>
 #include <string.h>
 #define MAX 500
