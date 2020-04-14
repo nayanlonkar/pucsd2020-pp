@@ -1,0 +1,25 @@
+
+body {
+    /* margin-top: 5px; */
+    margin-right: 600px;
+    margin-left: 150px;
+}
+
+.resume_name {
+    text-align: center;
+    font-size: 40px;
+}
+
+.info {
+    text-align: right;
+    font-weight: 550;
+}
+
+.info td {
+    text-align: left;
+}
+
+#tags {
+    font-size: 1.3em;
+}
+
