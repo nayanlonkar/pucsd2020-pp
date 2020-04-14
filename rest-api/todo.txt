@@ -1,15 +1,15 @@
 
 1) change the path to 
-	/home/phoenix/go/src/github.com/pucsd2020-pp/rest-api
+	~/go/src/github.com/pucsd2020-pp/rest-api
 
 2) change following things in file
-	/home/phoenix/go/src/github.com/pucsd2020-pp/rest-api/repository/user/user.go
+	~/go/src/github.com/pucsd2020-pp/rest-api/repository/user/user.go
 
 	usr := obj.(*model.User)     to       usr := obj.(model.User)     and
 	result, err := driver.Create(user.conn, usr)    to result, err := driver.Create(user.conn, &usr)
 
 3)  change following things in file 
-	/home/phoenix/go/src/github.com/pucsd2020-pp/rest-api/driver/mysql.go
+	~/go/src/github.com/pucsd2020-pp/rest-api/driver/mysql.go
 
 	remove value.IsNil()   from entire file
 
