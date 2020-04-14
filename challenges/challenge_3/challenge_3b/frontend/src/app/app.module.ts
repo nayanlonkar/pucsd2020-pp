@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// custom modules
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { CreateComponent } from './components/create/create.component';
@@ -20,13 +21,10 @@ import { MenuComponent } from './components/layout/menu/menu.component';
     UpdateComponent,
     DeleteComponent,
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
