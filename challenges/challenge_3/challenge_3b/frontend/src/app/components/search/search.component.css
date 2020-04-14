@@ -1,0 +1,33 @@
+div {
+  text-align: center;
+}
+
+form {
+  margin-top: 50px;
+}
+
+input {
+  font-size: large;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  height: 25px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  /* background-color: cyan; */
+  background-color: lightgray;
+}
+
+button {
+  font-size: large;
+  height: 40px;
+  width: 110px;
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
