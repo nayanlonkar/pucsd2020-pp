@@ -32,7 +32,6 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {}
 
   async onSubmitCreate(values) {
-    console.log(values);
     this.data.first_name = values.first_name;
     this.data.last_name = values.last_name;
     this.data.email = values.email_id;
