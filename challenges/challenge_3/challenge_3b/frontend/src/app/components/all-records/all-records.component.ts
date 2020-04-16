@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-records',
@@ -7,10 +7,16 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./all-records.component.css'],
 })
 export class AllRecordsComponent implements OnInit {
-  constructor(private apiservice: ApiService) {}
+  constructor(private http: HttpClient) {}
+
+  // private URL = 'https://jsonplaceholder.typicode.com/posts/';
+  // private URL = 'http://localhost:9090/webapi/v1/user';
+  private URL = '/api/webapi/v1/user';
+
   public result;
-  ngOnInit(): void {
-    // this.apiservice.getAll().subscribe((data) => console.log(data));
-    this.apiservice.getAll().subscribe((data) => (this.result = data));
+  async ngOnInit() {
+    this.result = await this.http.get(this.URL).toPromise();
+    this.result = this.result.data;
+    console.log(this.result[0]);
   }
 }
