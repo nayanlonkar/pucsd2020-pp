@@ -8,9 +8,9 @@ import { ApiService } from '../../services/api.service';
 })
 export class AllRecordsComponent implements OnInit {
   constructor(private apiservice: ApiService) {}
-  public data;
+  public result;
   ngOnInit(): void {
     // this.apiservice.getAll().subscribe((data) => console.log(data));
-    this.apiservice.getAll().subscribe((data) => (this.data = data));
+    this.apiservice.getAll().subscribe((data) => (this.result = data));
   }
 }

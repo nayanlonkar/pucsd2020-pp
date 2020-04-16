@@ -31,3 +31,8 @@ button {
   margin-right: 40px;
   margin-left: 40px;
 }
+
+table {
+  font-size: large;
+  margin-left: 500px;
+}
