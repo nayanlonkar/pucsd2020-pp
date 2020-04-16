@@ -1,12 +1,21 @@
 <div class="create">
   <h1>Create Record</h1>
   <h5>** Id will be assigned by the system **</h5>
-  <form>
-    <input type="text" name="first_name" placeholder="First Name" /> <br />
-    <input type="text" name="last_name" placeholder="Last Name" /> <br />
-    <input type="email" name="email_id" placeholder="Email Id" /> <br />
-    <input type="text" name="contact_number" placeholder="Contact No." /> <br />
-    <input type="password" name="password" placeholder="Password" /> <br />
+  <form #create="ngForm" (ngSubmit)="onSubmitCreate(create.value)">
+    <input type="text" name="first_name" placeholder="First Name" ngModel />
+    <br />
+    <input type="text" name="last_name" placeholder="Last Name" ngModel />
+    <br />
+    <input type="email" name="email_id" placeholder="Email Id" ngModel /> <br />
+    <input
+      type="text"
+      name="contact_number"
+      placeholder="Contact No."
+      ngModel
+    />
+    <br />
+    <input type="password" name="password" placeholder="Password" ngModel />
+    <br />
     <button type="submit">Create</button>
     <button type="button" routerLink="/">Cancel</button>
   </form>
