@@ -1,7 +1,7 @@
 <div class="delete">
   <h1>Delete Record</h1>
-  <form>
-    <input type="text" name="id" placeholder="Enter Id" /> <br />
+  <form #deleteId="ngForm" (ngSubmit)="onClickDelete(deleteId.value.id)">
+    <input type="text" name="id" placeholder="Enter Id" ngModel /> <br />
     <button type="submit">Delete</button>
     <button type="button" routerLink="/">Cancel</button>
   </form>
