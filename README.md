@@ -15,5 +15,9 @@ Database Pooling
 
 ## Challenges
   * Challenge 1
+    * Wireframe
+    
   * Challenge 2
+    * Go program flow
+    
   * Challenge 3
