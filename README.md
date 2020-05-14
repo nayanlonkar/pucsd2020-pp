@@ -11,7 +11,7 @@ Resume using Angular with routing
 Logger in C
 
 ## Assignment-004
-Database Pooling
+Resume in Angular with routing
 
 ## Challenges
   * Challenge 1
