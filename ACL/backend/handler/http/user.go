@@ -16,12 +16,14 @@ import (
 
 type User struct {
 	handler.HTTPHandler
-	repo repository.IRepository
+	repo  repository.IRepository
+	repo1 repository.JRepository
 }
 
 func NewUserHandler(conn *sql.DB) *User {
 	return &User{
-		repo: user.NewUserRepository(conn),
+		repo:  user.NewUserRepository(conn),
+		repo1: user.NewUserRepository(conn),
 	}
 }
 
@@ -32,6 +34,7 @@ func (user *User) GetHTTPHandler() []*handler.HTTPHandler {
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPut, Path: "user/{id}", Func: user.Update},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "user/{id}", Func: user.Delete},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "user", Func: user.GetAll},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPost, Path: "login", Func: user.Login},
 	}
 }
 
@@ -48,6 +51,30 @@ func (user *User) GetByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	handler.WriteJSONResponse(w, r, usr, http.StatusOK, err)
+}
+
+func (user *User) Login(w http.ResponseWriter, r *http.Request) {
+	var usr1 model.User
+	err := json.NewDecoder(r.Body).Decode(&usr1)
+	id := usr1.Id
+	// fmt.Printf("id is %d\n", id)
+	password := usr1.Password
+	var usr interface{}
+	for {
+		if nil != err {
+			break
+		}
+
+		// usr, err = user.repo.Login(r.Context(), id, password)
+		usr, err = user.repo1.Login(r.Context(), id, password)
+		break
+	}
+	if nil != err {
+		handler.WriteJSONResponse(w, r, usr, http.StatusNotFound, err)
+	} else {
+		handler.WriteJSONResponse(w, r, usr, http.StatusOK, err)
+	}
+
 }
 
 func (user *User) Create(w http.ResponseWriter, r *http.Request) {
@@ -79,7 +106,7 @@ func (user *User) Update(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// set logged in user id for tracking update
-		usr.UpdatedBy = 0
+		// usr.UpdatedBy = 0
 
 		iUsr, err = user.repo.Update(r.Context(), usr)
 		if nil != err {

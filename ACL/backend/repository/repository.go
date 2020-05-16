@@ -12,6 +12,10 @@ type IRepository interface {
 	GetAll(context.Context) ([]interface{}, error)
 }
 
+type JRepository interface {
+	Login(context.Context, int64, string) (interface{}, error)
+}
+
 type Repository struct {
 }
 
@@ -32,5 +36,9 @@ func (repo *Repository) Delete(cntx context.Context, id int64) (deleted bool, er
 }
 
 func (repo *Repository) GetAll(cntx context.Context) (obj []interface{}, err error) {
+	return
+}
+
+func (repo *Repository) Login(cntx context.Context, id int64, password string) (obj interface{}, err error) {
 	return
 }
