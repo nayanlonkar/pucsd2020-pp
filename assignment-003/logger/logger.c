@@ -7,8 +7,7 @@
 FILE *fp ;
 static int SESSION_TRACKER; //Keeps track of session
 
-char* print_time()
-{
+char* print_time() {
     int size = 0;
     time_t t;
     char *buf;
@@ -26,8 +25,8 @@ char* print_time()
    
     return buf;
 }
-void log_print(char* filename, int line, char *fmt,...)
-{
+
+void log_print(char* filename, int line, char *fmt,...) {
     va_list         list;
     char            *p, *r;
     int             e;
@@ -43,28 +42,21 @@ void log_print(char* filename, int line, char *fmt,...)
 
     for ( p = fmt ; *p ; ++p )
     {
-        if ( *p != '%' )//If simple string
-        {
+        if ( *p != '%' ) {
             fputc( *p,fp );
         }
-        else
-        {
-            switch ( *++p )
-            {
-                /* string */
+        else {
+            switch ( *++p ) {
             case 's':
             {
                 r = va_arg( list, char * );
-
                 fprintf(fp,"%s", r);
                 continue;
             }
-
             /* integer */
             case 'd':
             {
                 e = va_arg( list, int );
-
                 fprintf(fp,"%d", e);
                 continue;
             }
@@ -81,7 +73,6 @@ void log_print(char* filename, int line, char *fmt,...)
 }
 
 
-//test.c
 #include <stdio.h>
 #include "logger.h"
 int main()
