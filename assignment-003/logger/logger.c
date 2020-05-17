@@ -86,12 +86,5 @@ void log_print(char* filename, int line, char *fmt,...)
 #include "logger.h"
 int main()
 {
-  
-  char *s = "is Working";
-
-  
-   LOG_PRINT("Hello World ");
-   LOG_PRINT("Logger !!! %s",s);
-   LOG_PRINT("Hurray");
-   
+   LOG_PRINT("Logger is started\n");   
 }
