@@ -16,18 +16,21 @@ import (
 
 type Files struct {
 	handler.HTTPHandler
-	repo repository.IRepository
+	repo  repository.IRepository
+	repo1 repository.FRepository
 }
 
 func NewFilesHandler(conn *sql.DB) *Files {
 	return &Files{
-		repo: files.NewFilesRepository(conn),
+		repo:  files.NewFilesRepository(conn),
+		repo1: files.NewFilesRepository(conn),
 	}
 }
 
 func (files *Files) GetHTTPHandler() []*handler.HTTPHandler {
 	return []*handler.HTTPHandler{
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "files/{id}", Func: files.GetByID},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "files1/{id}", Func: files.GetFilesByPID},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPost, Path: "files", Func: files.Create},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodPut, Path: "files/{id}", Func: files.Update},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "files/{id}", Func: files.Delete},
@@ -44,6 +47,22 @@ func (files *Files) GetByID(w http.ResponseWriter, r *http.Request) {
 		}
 
 		usr, err = files.repo.GetByID(r.Context(), id)
+		break
+	}
+
+	handler.WriteJSONResponse(w, r, usr, http.StatusOK, err)
+}
+
+func (files *Files) GetFilesByPID(w http.ResponseWriter, r *http.Request) {
+	var usr interface{}
+	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	for {
+		if nil != err {
+			break
+		}
+
+		// usr, err = files.repo.GetByID(r.Context(), id)
+		usr, err = files.repo1.GetFilesByPID(r.Context(), id)
 		break
 	}
 

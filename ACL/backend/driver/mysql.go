@@ -268,23 +268,47 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 		return nil, err
 	}
 
+	// defer row.Close()
+	// objects := make([]interface{}, 0)
+	// for row.Next() {
+	// 	if nil != err {
+	// 		log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
+	// 		return nil, err
+	// 	}
+
+	// 	err = row.Scan(pointers...)
+
+	// 	if nil != err {
+	// 		log.Printf("Error: row.Scan: %s\n", err.Error())
+	// 		return nil, err
+	// 	}
+
+	// 	objects = append(objects, object)
+
+	// }
+
+	// return objects, nil
+	//****************************************
 	defer row.Close()
 	objects := make([]interface{}, 0)
+	recds, err := row.Columns()
 	for row.Next() {
 		if nil != err {
 			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
 			return nil, err
 		}
-
-		err = row.Scan(pointers...)
+		values := make([]interface{}, len(recds))
+		recdsWrite := make([]string, len(recds))
+		for index, _ := range recds {
+			values[index] = &recdsWrite[index]
+		}
+		err = row.Scan(values...)
 		if nil != err {
 			log.Printf("Error: row.Scan: %s\n", err.Error())
 			return nil, err
 		}
-
-		objects = append(objects, object)
+		objects = append(objects, values)
 	}
-
 	return objects, nil
 }
 
@@ -300,9 +324,7 @@ func DeleteById(conn *sql.DB, object model.IModel, id int64) error {
 	if nil != err {
 		log.Printf("Delete Syntax Error: %s\n\tError Query: %s : %s\n",
 			err.Error(), object.String(), query)
-		// return nil, err
 		return err
-
 	}
 
 	defer stmt.Close()
@@ -313,34 +335,8 @@ func DeleteById(conn *sql.DB, object model.IModel, id int64) error {
 			err.Error(), object.String(), query)
 	}
 
-	// return result, err
 	return err
 }
-
-// func SoftDeleteById(conn *sql.DB, object model.IModel, id int64) error {
-// 	var queryBuffer bytes.Buffer
-// 	queryBuffer.WriteString("UPDATE ")
-// 	queryBuffer.WriteString(object.Table())
-// 	queryBuffer.WriteString(" SET deleted = 1  WHERE id = ?")
-
-// 	query := queryBuffer.String()
-// 	//	log.Println("Delete statement is: %s", query)
-// 	stmt, err := conn.Prepare(query)
-// 	if nil != err {
-// 		log.Printf("Delete Syntax Error: %s\n\tError Query: %s : %s\n",
-// 			err.Error(), object.String(), query)
-// 		return err
-// 	}
-
-// 	defer stmt.Close()
-// 	_, err = stmt.Exec(id)
-// 	if nil != err {
-// 		log.Printf("Delete Execute Error: %s\nError Query: %s : %s\n",
-// 			err.Error(), object.String(), query)
-// 	}
-
-// 	return err
-// }
 
 func Login(conn *sql.DB, object model.IModel, id int64, password string) (model.IModel, error) {
 	rValue := reflect.ValueOf(object)

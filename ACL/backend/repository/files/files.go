@@ -52,3 +52,11 @@ func (files *filesRepository) GetAll(cntx context.Context) ([]interface{}, error
 	obj := &model.Files{}
 	return driver.GetAll(files.conn, obj, 0, 0)
 }
+
+func (files *filesRepository) GetFilesByPID(cntx context.Context, id int64) (interface{}, error) {
+	obj := new(model.Usergroup)
+	// return driver.GetGroupById(usergroup.conn, obj, id)
+	// return driver.GetUserByGId(files.conn, obj, id)
+	return driver.GetFilesByPId(files.conn, obj, id)
+
+}

@@ -1,10 +1,9 @@
 package model
 
 type User struct {
-	Id        int64  `json:"user_id,omitempty" key:"primary" autoincr:"1" column:"id"`
+	Id        int64  `json:"id,omitempty" key:"primary" autoincr:"1" column:"id"`
 	FirstName string `json:"first_name" column:"first_name"`
 	LastName  string `json:"last_name" column:"last_name"`
-	UserName  string `json:"username" column:"username"`
 	Password  string `json:"password" column:"password"`
 }
 

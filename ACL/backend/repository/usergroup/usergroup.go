@@ -52,3 +52,19 @@ func (usergroup *usergroupRepository) GetAll(cntx context.Context) ([]interface{
 	obj := &model.Usergroup{}
 	return driver.GetAll(usergroup.conn, obj, 0, 0)
 }
+
+// func (usergroup *usergroupRepository) Login(cntx context.Context, id int64, password string) (interface{}, error) {
+// 	obj := new(model.Usergroup)
+// 	return driver.Login(usergroup.conn, obj, id, password)
+// }
+
+func (usergroup *usergroupRepository) GetGroupByID(cntx context.Context, id int64) (interface{}, error) {
+	obj := new(model.Usergroup)
+	return driver.GetGroupById(usergroup.conn, obj, id)
+}
+
+func (usergroup *usergroupRepository) GetUserByGID(cntx context.Context, id int64) (interface{}, error) {
+	obj := new(model.Usergroup)
+	// return driver.GetGroupById(usergroup.conn, obj, id)
+	return driver.GetUserByGId(usergroup.conn, obj, id)
+}

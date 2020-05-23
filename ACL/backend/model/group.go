@@ -6,10 +6,10 @@ type Group struct {
 	GroupInfo string `json:"group_info" column:"group_info"`
 }
 
-func (group *Group) Table() string {
+func (user *Group) Table() string {
 	return "groups1"
 }
 
-func (group *Group) String() string {
-	return Stringify(group)
+func (user *Group) String() string {
+	return Stringify(user)
 }

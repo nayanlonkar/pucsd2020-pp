@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/cors"
 
 	"github.com/pucsd2020-pp/rest-api/config"
 	"github.com/pucsd2020-pp/rest-api/driver"
@@ -26,15 +27,16 @@ func init() {
 
 	dbConn, err := driver.NewMysqlConnection(config.Config().Database)
 	if nil != err {
-		log.Printf("Error while creating db connectiion:%s", err.Error())
+		log.Printf("Error while creating db connection:%s", err.Error())
 		os.Exit(1)
 	}
 
 	handlers = []handler.IHTTPHandler{
 		httpHandler.NewUserHandler(dbConn),
-		httpHandler.NewFilesHandler(dbConn),
 		httpHandler.NewGroupHandler(dbConn),
+		httpHandler.NewAdminHandler(dbConn),
 		httpHandler.NewUsergroupHandler(dbConn),
+		httpHandler.NewFilesHandler(dbConn),
 	}
 }
 
@@ -64,7 +66,16 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.Logger)
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300, // Maximum value not ignored by any of major browsers
+	}))
 	createRouterGroup(router)
+	log.Println("Server started")
 
 	http.ListenAndServe(fmt.Sprintf("%s:%d",
 		config.Config().Host, config.Config().Port), router)
